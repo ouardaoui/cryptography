@@ -38,7 +38,3 @@ def rc4(txt) :
     k = prga_gen(size,s)
     cypher = xor_string(txt,to_string(k))
     return cypher
-
-txt = rc4("HELLOWORLD")
-for i in txt: 
-    print(hex(ord(i)),"\t", end="")
