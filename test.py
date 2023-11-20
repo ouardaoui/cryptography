@@ -6,3 +6,5 @@ txt = "Cryptanalysis of the Vigenere cipher involves various techniques, and the
 
 for i in txt : 
     print(hex(ord(i))," ",end="")
+
+txt = "hello"
