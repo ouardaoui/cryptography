@@ -1,5 +1,15 @@
 import sys
-from tools import english_letter_frequency
+
+english_letter_frequency = {
+ 	'a': .08167, 'b': .01492, 'c': .02782, 'd': .04253,
+ 	'e': .12702, 'f': .02228, 'g': .02015, 'h': .06094,
+ 	'i': .06094, 'j': .00153, 'k': .00772, 'l': .04025,
+ 	'm': .02406, 'n': .06749, 'o': .07507, 'p': .01929,
+ 	'q': .00095, 'r': .05987, 's': .06327, 't': .09056,
+ 	'u': .02758, 'v': .00978, 'w': .02360, 'x': .00150,
+ 	'y': .01974, 'z': .00074, ' ': .13000
+ }
+
 
 arg = sys.argv 
 
@@ -18,27 +28,14 @@ def alpha_cout (txt) :
 def xor(str, key) : 
     output = ""
     for i in str : 
-        output += chr(ord(i) ^ key)
+        output += chr(i ^ key)
     return output
 
 def getscore(txt) : 
     score = 0 
-    alpha = 0 
-    lentgh = alpha_cout(txt)
-    letter_counts = {letter: 0 for letter in 'abcdefghijklmnopqrstuvwxyz'}
     for char in txt : 
-        if char.isalpha() and char.lower() >= 'a' and char.lower() <= 'z' :
-            alpha += 1 
-            letter_counts[char.lower()] += 1
-    if(lentgh):
-        alpha =alpha * 100 / lentgh
-    if (alpha > 80) : 
-        for lettre in letter_counts :
-            letter_counts[lettre] *=  100 / lentgh
-            if (letter_counts[lettre] > english_letter_frequency[lettre] - 2)  and (letter_counts[lettre] < english_letter_frequency[lettre] + 2) : 
-                score += 1
-            if (letter_counts[lettre] > english_letter_frequency[lettre] - 1)  and (letter_counts[lettre] < english_letter_frequency[lettre] + 1) :
-                score += 1 
+        if char in english_letter_frequency : 
+            score +=  english_letter_frequency[char]
     return score 
 
 
@@ -46,11 +43,12 @@ def get_key(cipher):
     score = 0
     k = 0
     plaintxt = ""
-    for key in range(128):
+    for key in range(256):
         txt = xor(cipher, key)
-        if score < getscore(txt): 
+        s = getscore(txt)
+        if score <  s: 
             plaintxt = txt
-            score = getscore(txt)
+            score = s
             k = key
     return k,plaintxt
 
@@ -58,13 +56,9 @@ with open(arg[1],'r') as file :
     output = ""
     score = 0 
     while(content := file.readline()):
-        key,txt = get_key(content)
+        key,txt = get_key(bytes.fromhex(content.strip()))
         var = getscore(txt) 
-        print(var)
         if(score < var):
             output = txt
             score = var
-    print(output)
-# cphr = xor(arg[1], 6)
-# k = get_key(cphr)
-# print(k)
+    print(output.strip())
