@@ -21,3 +21,5 @@ def vigenere(txt,key):
         else: 
             cipher +=  c 
     return cipher 
+
+ 

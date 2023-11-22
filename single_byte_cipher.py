@@ -50,7 +50,7 @@ def get_key(cipher):
             plaintxt = txt
             score = s
             k = key
-    return k,plaintxt
+    return k,plaintxt,score
 
 with open(arg[1],'r') as file :
     output = ""
