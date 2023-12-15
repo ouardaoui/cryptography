@@ -1,10 +1,10 @@
 from itertools import islice,cycle 
 from fixed_xor import fixed_xor_byte 
 
-def xor_reapeat_key(plaintxt, key) :
+def xor_reapeat_key(plaintext, key) :
     new_key = bytes(islice(cycle(key),len(plaintext)))
     cipher_txt = fixed_xor_byte(plaintext,new_key)
-    return cipher_txt.encode().hex()
+    return cipher_txt.encode()
     
 
 if __name__ == "__main__":

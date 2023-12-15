@@ -45,7 +45,7 @@ def single_xor_cipher_second(ct) :
         candidate = (score, key)
         best_candidate = min(best_candidate, candidate)    
     output =  "".join([chr(i ^ best_candidate[1]) for i in ct])
-    return (best_candidate[0],best_candidate[1], output)
+    return (best_candidate[0],best_candidate[1], output) # score, key,output 
 
 if __name__ ==  "__main__" :
     my = single_xor_cipher_second(bytes.fromhex(hexa))
