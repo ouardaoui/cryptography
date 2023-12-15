@@ -34,8 +34,6 @@ txt = single_xor_cipher(hexa)
 
 byte_hexa = bytes.fromhex(hexa)
 
-
-
 def single_xor_cipher_second(ct) : 
     len_ct = len(ct)
     best_candidate = (float('inf'),0,None)

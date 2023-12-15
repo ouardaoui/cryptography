@@ -1,7 +1,7 @@
 from single_byte_xor_cipher import single_xor_cipher_second  
 
 def get_com(line) : 
-    to_byte = bytes.fromhex(line)
+    to_byte = bytes.fromhex(line.strip())
     ouput = single_xor_cipher_second(to_byte)
     return ouput
 
